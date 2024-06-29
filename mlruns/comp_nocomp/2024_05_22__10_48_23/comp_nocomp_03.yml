@@ -1,0 +1,129 @@
+### ARGS
+# python train.py --config_path configs/train/comp_nocomp/comp_nocomp_03.yml
+
+
+# dirs
+root_dir: mlruns/comp_nocomp
+
+curr_time: !apply:utils.training.get_curr_time
+
+main_dir: !apply:utils.training.create_folder
+    name: !ref <curr_time>
+    _dir: !ref <root_dir>
+
+ckpt_dir: !apply:utils.training.create_folder
+    name: ckpt
+    _dir: !ref <main_dir>
+    
+preds_dir: !apply:utils.training.create_folder
+    name: predictions
+    _dir: !ref <main_dir>
+
+
+# model args
+device: "cuda:1"
+model_name: DeepPavlov/rubert-base-cased-conversational
+frozen_head: False
+
+# class importance
+num_labels: 2
+class_weights: !apply:torch.tensor
+    - [1.0, 0.75]
+id2label: {0: 0, 1: 1}
+label2id: {0: 0, 1: 1}   
+
+
+# metric args
+final_metric_name: "f1"
+final_metric_kwargs: {
+    average: "macro",
+}
+
+metric_name: "roc_auc"
+metric_kwargs: {
+    average: "macro",
+}
+
+compute_metrics: !apply:utils.metrics.get_metric_foo
+    metric_name: !ref <metric_name>
+    num_labels: !ref <num_labels>
+    metric_kwargs: !ref <metric_kwargs>
+    
+    
+# train args
+num_train_epochs: 5
+lr: 3.e-6
+weight_decay: 0.01
+train_batch_size: 16
+eval_batch_size: 16
+inference_batch_size: 2
+gradient_accumulation_steps: 1
+seed: 42
+
+
+# tokenizer args
+tokenizer_args: {
+    max_length: 128, 
+    truncation: True, 
+    padding: True,
+    }
+    
+    
+# data args
+x_column: "реплика говорившего"
+x_column_pair: "реплика перебившего"
+y_column: "y_true"
+test_fold: 0
+val_folds: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+csv_path: data/COMBINED_02/INTERRUPTIONS_COMBINED_02_TEXTNODUPS_SETTING_06_COMP_COOP_TEXT.csv
+df: !apply:pandas.read_csv
+    - !ref <csv_path>
+    
+synthesize_foos: []
+
+
+### INSTANCES
+
+model: !apply:transformers.AutoModelForSequenceClassification.from_pretrained
+    pretrained_model_name_or_path: !ref <model_name>
+    num_labels: !ref <num_labels>
+    id2label: !ref <id2label>
+    label2id: !ref <label2id>
+
+
+tokenizer: !apply:transformers.AutoTokenizer.from_pretrained
+    pretrained_model_name_or_path: !ref <model_name>
+    
+
+data_collator: !new:transformers.DataCollatorWithPadding
+    tokenizer: !ref <tokenizer>
+
+
+dataset: !new:utils.dataset.PairBertDataset
+    tokenizer: !ref <tokenizer>
+    tokenizer_args: !ref <tokenizer_args>
+    x_column: !ref <x_column>
+    x_column_pair: !ref <x_column_pair>
+    y_column: !ref <y_column>
+    
+
+training_args: {
+    learning_rate: !ref <lr>,
+    per_device_train_batch_size: !ref <train_batch_size>,
+    per_device_eval_batch_size: !ref <eval_batch_size>,
+    gradient_accumulation_steps: !ref <gradient_accumulation_steps>,
+    num_train_epochs: !ref <num_train_epochs>,
+    weight_decay: !ref <weight_decay>,
+    evaluation_strategy: "epoch",
+    save_strategy: "epoch",
+    logging_strategy: "epoch",
+    seed: !ref <seed>,
+    save_total_limit: 2,
+    load_best_model_at_end: True,
+    metric_for_best_model: !ref <metric_name>,
+    push_to_hub: False,
+}
+
+
+
+    
