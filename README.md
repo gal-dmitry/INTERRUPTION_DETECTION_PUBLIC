@@ -27,7 +27,7 @@ This is a public repository containing code for paper ["Detection of Competitive
     - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_07.yml`
 - Synthetic samples / wider context:
     - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_08.yml`
-        - + synthetic samples of class 0
+        - \+ synthetic samples of class 0
     - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_09.yml`
         - wider context
 
