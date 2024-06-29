@@ -21,12 +21,15 @@ This is a public repository containing code for paper ["Detection of Competitive
     - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_03.yml`
 - Learning Rate:
     - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_04.yml`
-    - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_05.yml` (best: lr=7e-6; roc_auc_binary=0.8870; F1_macro=0.8404)
+    - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_05.yml`
+        - best: lr=7e-6; roc_auc_binary=0.8870; F1_macro=0.8404
     - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_06.yml`
     - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_07.yml`
 - Synthetic samples / wider context:
-    - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_08.yml` (+ synthetic samples of class 0)
-    - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_09.yml` (wider context)
+    - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_08.yml`
+        - + synthetic samples of class 0
+    - `python train.py --config_path configs/train/comp_nocomp/comp_nocomp_09.yml`
+        - wider context
 
 
 #### Notebook
