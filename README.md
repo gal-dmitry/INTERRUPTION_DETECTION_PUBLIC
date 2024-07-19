@@ -4,7 +4,7 @@
 
 ### Description
 
-This is a public repository containing code for paper ["Detection of Competitive Interruptions in ASR-Transcribed Dialogues"](./). This is our second work dedicated to the task of contact center monitoring (see also ["Text-Based Detection of On-Hold Scripts in Contact Center Calls"](https://aircconline.com/abstract/mlaij/11224mlaij01.html)).
+This is a public repository containing code for paper ["Detection of Competitive Interruptions in ASR-Transcribed Dialogues"](https://aircconline.com/csit/papers/vol14/csit141306.pdf). This is our second work dedicated to the task of contact center monitoring (see also ["Text-Based Detection of On-Hold Scripts in Contact Center Calls"](https://aircconline.com/abstract/mlaij/11224mlaij01.html)).
 
 
 
