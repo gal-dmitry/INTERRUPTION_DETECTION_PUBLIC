@@ -4,7 +4,7 @@
 
 ### Description
 
-This is a public repository containing code for paper ["Conversational RuBERT for Detecting Competitive Interruptions in ASR-Transcribed Dialogues"](https://aircconline.com/csit/papers/vol14/csit141306.pdf). This is our second work dedicated to the task of contact center monitoring (see also ["Text-Based Detection of On-Hold Scripts in Contact Center Calls"](https://arxiv.org/abs/2407.09849)).
+This is a public repository containing code for paper ["Conversational RuBERT for Detecting Competitive Interruptions in ASR-Transcribed Dialogues"](https://arxiv.org/abs/2407.14940). This is our second work dedicated to the task of contact center monitoring (see also ["Text-Based Detection of On-Hold Scripts in Contact Center Calls"](https://arxiv.org/abs/2407.09849)).
 
 
 
